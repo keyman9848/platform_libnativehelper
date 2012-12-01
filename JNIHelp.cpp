@@ -63,6 +63,17 @@ static jclass findClass(C_JNIEnv* env, const char* className) {
     return (*env)->FindClass(e, className);
 }
 
+int jniRegisterSystemMethods(JNIEnv* env)
+{
+    ALOGE("Calling C++ fake jniRegisterSystemMethods()");
+    return 0;
+}
+
+extern "C" int jniRegisterSystemMethods(void *p) {
+    ALOGE("Calling C fake jniRegisterSystemMethods()");
+    return 1;
+}
+
 extern "C" int jniRegisterNativeMethods(C_JNIEnv* env, const char* className,
     const JNINativeMethod* gMethods, int numMethods)
 {
